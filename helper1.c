@@ -3,21 +3,20 @@
  * _strcat - concatenate two strings
  * @dest: string to be appended to
  * @src: string to append
- * @len_dest: length of dest
  * Return: concatenated string
  */
 
 char *_strcat(char *dest, char *src)
 {
-    int i;
-    i = _strlen(dest);
-    while (*src)
-    {
-        *(dest + i) = *src;
-        i++, src++;
-    }
-    *(dest + i) = '\0';
-    return (dest);
+int i;
+i = _strlen(dest);
+while (*src)
+{
+*(dest + i) = *src;
+i++, src++;
+}
+*(dest + i) = '\0';
+return (dest);
 }
 /**
  * _strlen - returns the length of a string
@@ -27,18 +26,18 @@ char *_strcat(char *dest, char *src)
 
 int _strlen(char *s)
 {
-    int len;
-    len = 0;
-    if (s == NULL)
-    {
-        return (0);
-    }
-    while (*s)
-    {
-        len++;
-        s++;
-    }
-    return (len);
+int len;
+len = 0;
+if (s == NULL)
+{
+return (0);
+}
+while (*s)
+{
+len++;
+s++;
+}
+return (len);
 }
 /**
  * _strcpy - copies the string pointed to by src,
@@ -51,14 +50,14 @@ int _strlen(char *s)
 
 char *_strcpy(char *dest, char *src)
 {
-    int i;
+int i;
 
-    for (i = 0; src[i]; i++)
-    {
-        dest[i] = src[i];
-    }
-    dest[i] = '\0';
-    return (dest);
+for (i = 0; src[i]; i++)
+{
+dest[i] = src[i];
+}
+dest[i] = '\0';
+return (dest);
 }
 
 /**
@@ -70,19 +69,19 @@ char *_strcpy(char *dest, char *src)
 
 char *_strdup2(char *str)
 {
-    char *new_str;
-    int size;
-    if (str == NULL)
-    {
-        return (NULL);
-    }
-    size = _strlen(str) + 1;
-    new_str = malloc(size);
-    if (new_str == NULL)
-    {
-        return (NULL);
-    }
-    return (_strcpy(new_str, str));
+char *new_str;
+int size;
+if (str == NULL)
+{
+return (NULL);
+}
+size = _strlen(str) + 1;
+new_str = malloc(size);
+if (new_str == NULL)
+{
+return (NULL);
+}
+return (_strcpy(new_str, str));
 }
 
 /**
@@ -94,13 +93,13 @@ char *_strdup2(char *str)
 
 int _strcmp(char *s1, char *s2)
 {
-    while (*s1 || *s2)
-    {
-        if (*s1 != *s2)
-        {
-            return (*s1 - *s2);
-        }
-        s1++, s2++;
-    }
-    return (0);
+while (*s1 || *s2)
+{
+if (*s1 != *s2)
+{
+return (*s1 - *s2);
+}
+s1++, s2++;
+}
+return (0);
 }
