@@ -5,7 +5,7 @@
  */
 void prompt(list_t *env)
 {
-    char **cmd_arr = NULL;
+    char **cmd_arr;
     size_t cmd_num = 0;
     while (1)
     {

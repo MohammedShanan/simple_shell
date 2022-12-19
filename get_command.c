@@ -6,7 +6,7 @@
 char **get_cmd(list_t *env)
 {
     char *cmd = NULL, **arr = NULL;
-    size_t n;
+    size_t n = 0;
     int nread;
     nread = _getline(&cmd, &n, STDIN_FILENO);
     ctrl_d(nread, env, cmd);
