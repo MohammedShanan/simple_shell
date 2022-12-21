@@ -41,7 +41,7 @@ return (-1);
 }
 while (1)
 {
-nread = read(STDIN_FILENO, str, 1024);
+nread = read(stream, str, 1024);
 if (nread <= 0)
 {
 free(str);
