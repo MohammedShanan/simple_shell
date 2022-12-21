@@ -23,8 +23,8 @@ char *str;
 unsigned int len;
 struct list_s *next;
 } list_t;
-void prompt(list_t *env);
-void ctrl_d(int nread, list_t *env, char *cmd);
+void prompt(char *env[]);
+void ctrl_d(int nread,char *cmd);
 void ctrl_c(int n __attribute__((unused)));
 /*helper functions 1*/
 char *_strcat(char *dest, char *src);
@@ -57,12 +57,12 @@ char **_strtok(char **arr, char *str, const char *delim);
 /*get cmd*/
 char *get_cmd_path(char **cmd, list_t *env);
 int _getline(char **buff, size_t *n, int stream);
-char **get_cmd(list_t *env);
+char **get_cmd(void);
 /*execute commands 3*/
 int builtins(char **cmd, list_t *env, int cmd_num);
-int __execve(char **cmd, list_t *env, int cmd_num);
-int execute_cmds(char **cmds, list_t *env, int *cmd_num);
-void non_interactive(list_t *env);
+int __execve(char **cmd, char *env[], int cmd_num);
+int execute_cmds(char **cmds, char *env[], int *cmd_num);
+void non_interactive(char *env[]);
 /*error handling*/
 void cmd_not_found(char **cmd, list_t *env, int cmd_num);
 void illegal_number(char **cmd, list_t *env, int cmd_num);

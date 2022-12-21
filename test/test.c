@@ -693,7 +693,6 @@ void ctrl_d(int nread, list_t *env, char *cmd)
 
 
 
-
 void print_double_ptr(char **ptr)
 {
     int i = 0;

@@ -4,13 +4,13 @@
  * @env: linked list of the environment variables
  * Return: a command
  */
-char **get_cmd(list_t *env)
+char **get_cmd(void)
 {
 char *cmd = NULL, **arr = NULL;
 size_t n = 0;
 int nread;
 nread = _getline(&cmd, &n, STDIN_FILENO);
-ctrl_d(nread, env, cmd);
+ctrl_d(nread, cmd);
 remove_comments(cmd);
 arr = _strtok(arr, cmd, ";\n");
 free(cmd);

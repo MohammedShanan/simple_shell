@@ -6,17 +6,19 @@
  * @cmd_num: the command number
  * Return: 0
  */
-int __execve(char **cmd, list_t *env, int cmd_num)
+int __execve(char **cmd, char *env[], int cmd_num)
 {
 char *path;
-if (builtins(cmd, env, cmd_num))
+list_t *env_list;
+env_list = array_to_linked_list(env);
+if (builtins(cmd, env_list, cmd_num))
 {
 return (0);
 }
-path = get_cmd_path(cmd, env);
+path = get_cmd_path(cmd, env_list);
 if (path == NULL)
 {
-cmd_not_found(cmd, env, cmd_num);
+cmd_not_found(cmd, env_list, cmd_num);
 return (127);
 }
 if (fork() != 0)
@@ -24,7 +26,7 @@ if (fork() != 0)
 wait(NULL);
 free(path);
 }
-else if (execve(path, cmd, environ) == -1)
+else if (execve(path, cmd, env) == -1)
 {
 return (-1);
 }
@@ -71,13 +73,12 @@ return (exit_status);
  * non_interactive - handle non_interactive mode
  * @env: linked list of the environment variables
  */
-void non_interactive(list_t *env)
+void non_interactive(char *env[])
 {
 char **cmds;
 int n = 0, exit_st;
-cmds = get_cmd(env);
+cmds = get_cmd();
 exit_st = execute_cmds(cmds, env, &n);
-free_list(env);
 exit(exit_st);
 }
 /**
@@ -87,7 +88,7 @@ exit(exit_st);
 * @cmd_num: the command number
 * Return: 0
 */
-int execute_cmds(char **cmds, list_t *env, int *cmd_num)
+int execute_cmds(char **cmds, char *env[], int *cmd_num)
 {
 char **cmd;
 int i = 0, exit_st = 0;
