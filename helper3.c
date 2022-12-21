@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * which - get the path to the command executable
- * @cmd: command
+ * @exe: command
  * @env: linked list of the environment variables
  * Return: absolute path to the command executable
  */
@@ -39,12 +39,13 @@ return (NULL);
  */
 char **_strtok(char **arr, char *str, const char *delim)
 {
-int i, j, len, indx;
+int i, j, len, indx, len_str;
 i = j = len = indx = 0;
+len_str = _strlen(str);
 arr = malloc(sizeof(char *) * 1024);
-while (str[i])
+while (i <= len_str)
 {
-if (is_c_in_str(str[i], delim))
+if (is_c_in_str(str[i], delim) || str[i] == '\0')
 {
 if (len != 0)
 {
@@ -94,4 +95,64 @@ return (NULL);
 }
 value = env;
 return (value);
+}
+
+/**
+ * num_to_str - convert a number to a string
+ * @n: number to be converted
+ * Return: number as a string
+ */
+char *num_to_str(int n)
+{
+int digit, i = 0, len_n = 1;
+char *s;
+double tens = 1;
+while (tens * 10 <= n)
+{
+tens *= 10;
+len_n++;
+}
+s = malloc(len_n + 1);
+if (s == NULL)
+{
+return (NULL);
+}
+while (tens >= 1)
+{
+digit = n / tens;
+s[i] = digit + '0';
+n = (n - (tens * digit));
+tens /= 10;
+i++;
+}
+s[i] = '\0';
+return (s);
+}
+/**
+ * remove_comments - remove comments
+ * @cmd: command
+ */
+void remove_comments(char *cmd)
+{
+int i = 0;
+while (cmd[i])
+{
+if (cmd[i] == '#')
+{
+if (i == 0)
+{
+cmd[0] = '\0';
+break;
+}
+else
+{
+if (cmd[i - 1] == ' ')
+{
+cmd[i - 1] = '\0';
+break;
+}
+}
+}
+i++;
+}
 }

@@ -100,9 +100,8 @@ dest[i] = '\0';
 return (dest);
 }
 /**
- * get_num - convert number from sting it int
+ * c_to_num - convert number from sting it int
  * @s: string
- * @indx: a pointer to the indx of the first digit of the number
  * Return: number as int
  */
 int c_to_num(char *s)

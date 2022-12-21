@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-// #include <sys/wait.h>
 #include <signal.h>
 #include <string.h>
 #include <strings.h>
@@ -24,7 +23,10 @@ unsigned int len;
 struct list_s *next;
 } list_t;
 void prompt(list_t *env);
+int _getline(char **buff, size_t *n, FILE *stream);
+char **_strtok(char **arr, char *str, const char *delim);
 void ctrl_d(int nread, list_t *env, char *cmd);
+char **get_cmd(list_t *env);
 void ctrl_c(int n __attribute__((unused)));
 /*helper functions 1*/
 char *_strcat(char *dest, char *src);
@@ -44,26 +46,16 @@ size_t list_len(const list_t *h);
 list_t *add_node_end(list_t **head, char *str);
 void free_list(list_t *head);
 /*builtins*/
-int __exit(char **cmd, list_t *env, int cmd_num);
+int __exit(char **cmd, list_t *env);
 void _env(list_t *env);
-void _setenv(char **cmd, list_t *env);
-void _unsetenv(char **cmd, list_t *env);
 /*helper 3*/
 list_t *get_env(char *var, list_t *env);
-char *which(char *exe, list_t *env);
-void remove_comments(char *cmd);
-char *num_to_str(int n);
-char **_strtok(char **arr, char *str, const char *delim);
-/*get cmd*/
 char *get_cmd_path(char **cmd, list_t *env);
-int _getline(char **buff, size_t *n, FILE *stream);
-char **get_cmd(list_t *env);
+char *which(char *exe, list_t *env);
 /*execute commands 3*/
 int builtins(char **cmd, list_t *env, int cmd_num);
 int __execve(char **cmd, list_t *env, int cmd_num);
-int execute_cmds(char **cmds, list_t *env, int *cmd_num);
+/*uncat*/
+void ctrl_l(int n __attribute__((unused)));
 void non_interactive(list_t *env);
-/*error handling*/
-void cmd_not_found(char **cmd, list_t *env, int cmd_num);
-void illegal_number(char **cmd, list_t *env, int cmd_num);
 #endif

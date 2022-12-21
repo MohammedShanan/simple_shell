@@ -5,8 +5,8 @@
  */
 void prompt(list_t *env)
 {
-char **cmd_arr;
-size_t cmd_num = 0;
+char **cmds_arr;
+int n = 0;
 while (1)
 {
 if (isatty(STDIN_FILENO))
@@ -14,12 +14,10 @@ write(STDOUT_FILENO, "$ ", 2);
 else
 non_interactive(env);
 signal(SIGINT, ctrl_c);
-cmd_arr = get_cmd(env);
-if (cmd_arr == NULL)
+cmds_arr = get_cmd(env);
+if (cmds_arr == NULL)
 continue;
-__execve(cmd_arr, env, cmd_num);
-free_double_ptr(cmd_arr);
-cmd_num++;
+execute_cmds(cmds_arr, env, &n);
 }
 }
 /**

@@ -2,6 +2,7 @@
 /**
  * get_cmd - get the command form stdin
  * @env: linked list of the environment variables
+ * Return: a command
  */
 char **get_cmd(list_t *env)
 {
@@ -10,7 +11,8 @@ size_t n = 0;
 int nread;
 nread = _getline(&cmd, &n, STDIN_FILENO);
 ctrl_d(nread, env, cmd);
-arr = _strtok(arr, cmd, " \n");
+remove_comments(cmd);
+arr = _strtok(arr, cmd, ";\n");
 free(cmd);
 if (arr[0] == NULL)
 {
@@ -30,7 +32,8 @@ int _getline(char **buff, size_t *n, FILE *stream UNUSED)
 {
 char *str;
 int nread;
-size_t len = 0, len_buff = _strlen(*buff);
+size_t len = 0, len_buff = *n, counter = 0;
+*buff = *n == 0 ? NULL : *buff;
 str = malloc(1025);
 if (str == NULL)
 {
@@ -52,6 +55,7 @@ if (len_buff > *n)
 }
 *buff = *n == 0 ? _strcpy(*buff, str) : _strcat(*buff, str);
 *n = len_buff;
+counter++;
 if (str[nread - 1] == '\n')
 {
 break;
@@ -72,8 +76,8 @@ char *get_cmd_path(char **cmd, list_t *env)
 char *pth = NULL;
 if (access(cmd[0], F_OK) == 0)
 {
+pth = malloc(_strlen(cmd[0]) + 1);
 pth = _strcpy(pth, cmd[0]);
-return (pth);
 }
 else
 {
@@ -87,5 +91,6 @@ if (access(pth, X_OK) == 0)
 {
 return (pth);
 }
+free(pth);
 return (NULL);
 }

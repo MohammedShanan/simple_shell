@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * array_to_linked_list - make and array into a liked list
- * @array: array to process
+ * @arr: array to process
  * Return: the array content as a linked list
  */
 list_t *array_to_linked_list(char *arr[])

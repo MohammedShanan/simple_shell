@@ -8,12 +8,12 @@
 
 char *_strcat(char *dest, char *src)
 {
-int i;
+int i, j = 0;
 i = _strlen(dest);
-while (*src)
+while (src[j])
 {
-*(dest + i) = *src;
-i++, src++;
+*(dest + i) = src[j];
+i++, j++;
 }
 *(dest + i) = '\0';
 return (dest);
@@ -32,10 +32,9 @@ if (s == NULL)
 {
 return (0);
 }
-while (*s)
+while (s[len])
 {
 len++;
-s++;
 }
 return (len);
 }
