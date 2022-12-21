@@ -56,7 +56,7 @@ char *num_to_str(int n);
 char **_strtok(char **arr, char *str, const char *delim);
 /*get cmd*/
 char *get_cmd_path(char **cmd, list_t *env);
-int _getline(char **buff, size_t *n, FILE *stream);
+int _getline(char **buff, size_t *n, int stream);
 char **get_cmd(list_t *env);
 /*execute commands 3*/
 int builtins(char **cmd, list_t *env, int cmd_num);

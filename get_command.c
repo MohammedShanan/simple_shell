@@ -28,7 +28,7 @@ return (arr);
  * @stream: file to read from
  * Return: number of charater read from the file
  */
-int _getline(char **buff, size_t *n, FILE *stream UNUSED)
+int _getline(char **buff, size_t *n, int stream)
 {
 char *str;
 int nread;
