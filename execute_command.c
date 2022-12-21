@@ -2,13 +2,15 @@
 /**
  * __execve - execute command
  * @cmd: array containing the command and it's arguments
- * @env: linked list of the environment variables
+ * @env: array of the environment variables
  * @cmd_num: the command number
+ * @env_list: linked list of the environment variables
  * Return: 0
  */
 int __execve(char **cmd, char *env[], int cmd_num, list_t *env_list)
 {
 char *path;
+(void)env;
 if (builtins(cmd, env_list, cmd_num))
 {
 return (0);
@@ -24,7 +26,7 @@ if (fork() != 0)
 wait(NULL);
 free(path);
 }
-else if (execve(path, cmd, env) == -1)
+else if (execve(path, cmd, NULL) == -1)
 {
 return (-1);
 }
@@ -68,8 +70,9 @@ return (0);
 return (exit_status);
 }
 /**
- * non_interactive - handle non_interactive mode
- * @env: linked list of the environment variables
+ * non_interactive - handle non_interactive modes
+ * @env: array of the environment variables
+ * @env_list: linked list of the environment variables
  */
 void non_interactive(char *env[], list_t *env_list)
 {
@@ -81,9 +84,10 @@ exit(exit_st);
 }
 /**
  *execute_cmds - execute builtins commands
-* @cmds: array containing the commands
-* @env: linked list of the environment variables
+* @cmd: array containing the command and it's arguments
+* @env: array of the environment variables
 * @cmd_num: the command number
+* @env_list: linked list of the environment variables
 * Return: 0
 */
 int execute_cmds(char **cmds, char *env[], int *cmd_num, list_t *env_list)
@@ -96,11 +100,11 @@ while (cmds[i] != NULL)
 cmd = _strtok(cmd, cmds[i], " ");
 if (cmd[0] != NULL)
 {
-    if (_strcmp(cmd[0], "exit") == 0)
-    {
-        free_double_ptr(cmds);
-    }
-    exit_st = __execve(cmd, env, *cmd_num, env_list);
+if (_strcmp(cmd[0], "exit") == 0)
+{
+free_double_ptr(cmds);
+}
+exit_st = __execve(cmd, env, *cmd_num, env_list);
 }
 free_double_ptr(cmd);
 i++;
