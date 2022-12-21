@@ -10,7 +10,6 @@ void cmd_not_found(char **cmd, list_t *env, int cmd_num)
 list_t *list;
 char **prog_name = NULL, *n;
 list = get_env("_", env);
-printf("Error\n");
 prog_name = _strtok(prog_name, list->str, "=");
 write(STDOUT_FILENO, prog_name[1], _strlen(prog_name[1]));
 write(STDOUT_FILENO, ": ", 2);
@@ -34,7 +33,6 @@ void illegal_number(char **cmd, list_t *env, int cmd_num)
 list_t *list;
 char **prog_name = NULL, *n;
 list = get_env("_", env);
-printf("Error\n");
 prog_name = _strtok(prog_name, list->str, "=");
 write(STDOUT_FILENO, prog_name[1], _strlen(prog_name[1]));
 write(STDOUT_FILENO, ": ", 2);

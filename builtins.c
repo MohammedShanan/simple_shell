@@ -22,7 +22,7 @@ env = env->next;
  */
 int __exit(char **cmd, list_t *env, int cmd_num)
 {
-int exit_st;
+int exit_st = 0;
 exit_st = cmd[1] != NULL ? c_to_num(cmd[1]) : 0;
 if (exit_st == -1)
 {
