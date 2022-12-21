@@ -24,7 +24,7 @@ unsigned int len;
 struct list_s *next;
 } list_t;
 void prompt(char *env[]);
-void ctrl_d(int nread,char *cmd);
+void ctrl_d(int nread,char *cmd, list_t *env_list);
 void ctrl_c(int n __attribute__((unused)));
 /*helper functions 1*/
 char *_strcat(char *dest, char *src);
@@ -57,7 +57,7 @@ char **_strtok(char **arr, char *str, const char *delim);
 /*get cmd*/
 char *get_cmd_path(char **cmd, list_t *env);
 int _getline(char **buff, size_t *n, int stream);
-char **get_cmd(void);
+char **get_cmd(list_t *env_list);
 /*execute commands 3*/
 int builtins(char **cmd, list_t *env, int cmd_num);
 int __execve(char **cmd, char *env[], int cmd_num, list_t *env_list);
