@@ -80,11 +80,12 @@ char **cmds;
 int n = 0, exit_st;
 cmds = get_cmd(env_list);
 exit_st = execute_cmds(cmds, env, &n, env_list);
+free_list(env);
 exit(exit_st);
 }
 /**
  *execute_cmds - execute builtins commands
-* @cmd: array containing the command and it's arguments
+* @cmds: array containing the command and it's arguments
 * @env: array of the environment variables
 * @cmd_num: the command number
 * @env_list: linked list of the environment variables

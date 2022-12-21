@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * get_cmd - get the command form stdin
- * @env: linked list of the environment variables
+ * @env_list: linked list of the environment variables
  * Return: a command
  */
 char **get_cmd(list_t *env_list)
