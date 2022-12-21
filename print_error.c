@@ -43,4 +43,5 @@ write(STDOUT_FILENO, ": ", 2);
 write(STDOUT_FILENO, "exit: Illegal number: ", 22);
 write(STDOUT_FILENO, cmd[1], _strlen(cmd[1]));
 write(STDOUT_FILENO, "\n", 1);
+free_double_ptr(prog_name);
 }

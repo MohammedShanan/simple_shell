@@ -41,7 +41,6 @@ return (0);
 int builtins(char **cmd, list_t *env, int cmd_num)
 {
 int exit_status = 1;
-printf("here 0");
 if (_strcmp(cmd[0], "exit") == 0)
 {
 exit_status = __exit(cmd, env, cmd_num);

@@ -30,7 +30,9 @@ illegal_number(cmd, env, cmd_num);
 return (1);
 }
 free_list(env);
+printf("here 0");
 free_double_ptr(cmd);
+printf("here 1");
 exit(exit_st);
 }
 /**
