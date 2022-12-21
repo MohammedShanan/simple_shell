@@ -2,14 +2,15 @@
 /**
  * get_cmd - get the command form stdin
  * @env_list: linked list of the environment variables
+ * @fd: file to read from
  * Return: a command
  */
-char **get_cmd(list_t *env_list)
+char **get_cmd(list_t *env_list, int fd)
 {
 char *cmd = NULL, **arr = NULL;
 size_t n = 0;
 int nread;
-nread = _getline(&cmd, &n, STDIN_FILENO);
+nread = _getline(&cmd, &n, fd);
 ctrl_d(nread, cmd, env_list);
 remove_comments(cmd);
 arr = _strtok(arr, cmd, ";\n");

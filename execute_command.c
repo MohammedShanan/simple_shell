@@ -78,7 +78,7 @@ void non_interactive(char *env[], list_t *env_list)
 {
 char **cmds;
 int n = 0, exit_st;
-cmds = get_cmd(env_list);
+cmds = get_cmd(env_list, STDIN_FILENO);
 exit_st = execute_cmds(cmds, env, &n, env_list);
 free_list(env_list);
 exit(exit_st);
@@ -112,4 +112,25 @@ i++;
 }
 free_double_ptr(cmds);
 return (exit_st);
+}
+/**
+ *execute_file - execute builtins commands
+ * @filename: file to read from
+ * @env: array of the environment variables
+ * @env_list: linked list of the environment variables
+ * Return: 0
+ */
+int execute_file(char *filename, char *env[], list_t *env_list)
+{
+char **cmds;
+int n = 0, exit_st = 0, fd;
+fd = open(filename, O_RDONLY);
+if (fd == -1)
+{
+return (-1);
+}
+cmds = get_cmd(env_list, fd);
+exit_st = execute_cmds(cmds, env, &n, env_list);
+free_list(env_list);
+exit(exit_st);
 }

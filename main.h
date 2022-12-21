@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <sys/wait.h>
+// #include <sys/wait.h>
 #include <signal.h>
 #include <string.h>
 #include <strings.h>
@@ -56,12 +56,13 @@ char **_strtok(char **arr, char *str, const char *delim);
 /*get cmd*/
 char *get_cmd_path(char **cmd, list_t *env);
 int _getline(char **buff, size_t *n, int stream);
-char **get_cmd(list_t *env_list);
+char **get_cmd(list_t *env_list, int fd);
 /*execute commands 3*/
 int builtins(char **cmd, list_t *env, int cmd_num);
 int __execve(char **cmd, char *env[], int cmd_num, list_t *env_list);
 int execute_cmds(char **cmds, char *env[], int *cmd_num, list_t *env_list);
 void non_interactive(char *env[], list_t *env_list);
+int execute_file(char *filename, char *env[], list_t *env_list);
 /*error handling*/
 void cmd_not_found(char **cmd, list_t *env, int cmd_num);
 void illegal_number(char **cmd, list_t *env, int cmd_num);

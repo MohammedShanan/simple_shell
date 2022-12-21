@@ -11,9 +11,11 @@ int main(int argc, char *argv[], char *env[])
 char **cmds_arr;
 int n = 0;
 list_t *env_list;
-(void)argc;
-(void)argv;
 env_list = array_to_linked_list(env);
+if (argc == 2)
+{
+execute_file(argv[1], env, env_list);
+}
 while (1)
 {
 if (isatty(STDIN_FILENO))
@@ -21,7 +23,7 @@ write(STDOUT_FILENO, "$ ", 2);
 else
 non_interactive(env, env_list);
 signal(SIGINT, ctrl_c);
-cmds_arr = get_cmd(env_list);
+cmds_arr = get_cmd(env_list, STDIN_FILENO);
 if (cmds_arr == NULL)
 continue;
 execute_cmds(cmds_arr, env, &n, env_list);
@@ -56,3 +58,4 @@ write(STDOUT_FILENO, "\n", 1);
 exit(0);
 }
 }
+
