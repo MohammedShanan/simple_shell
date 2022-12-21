@@ -24,7 +24,7 @@ if (fork() != 0)
 wait(NULL);
 free(path);
 }
-else if (execve(path, cmd, NULL) == -1)
+else if (execve(path, cmd, environ) == -1)
 {
 return (-1);
 }
@@ -90,18 +90,18 @@ exit(exit_st);
 int execute_cmds(char **cmds, list_t *env, int *cmd_num)
 {
 char **cmd;
-int i = 0;
+int i = 0, exit_st = 0;
 while (cmds[i] != NULL)
 {
 *cmd_num = *cmd_num + 1;
 cmd = _strtok(cmd, cmds[i], " ");
 if (cmd[0] != NULL)
 {
-__execve(cmd, env, *cmd_num);
+exit_st = __execve(cmd, env, *cmd_num);
 }
 free_double_ptr(cmd);
 i++;
 }
 free_double_ptr(cmds);
-return (0);
+return (exit_st);
 }
