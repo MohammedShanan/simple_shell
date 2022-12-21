@@ -25,6 +25,7 @@ non_interactive(env, env_list);
 signal(SIGINT, ctrl_c);
 cmds_arr = get_cmd(env_list, STDIN_FILENO);
 if (cmds_arr == NULL)
+n++;
 continue;
 execute_cmds(cmds_arr, env, &n, env_list);
 }
