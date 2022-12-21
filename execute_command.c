@@ -25,6 +25,7 @@ if (fork() != 0)
 {
 wait(NULL);
 free(path);
+free_list(env_list);
 }
 else if (execve(path, cmd, env) == -1)
 {
@@ -43,6 +44,7 @@ return (0);
 int builtins(char **cmd, list_t *env, int cmd_num)
 {
 int exit_status = 1;
+printf("here 0");
 if (_strcmp(cmd[0], "exit") == 0)
 {
 exit_status = __exit(cmd, env, cmd_num);
@@ -53,6 +55,7 @@ _env(env);
 }
 else if (_strcmp(cmd[0], "setenv") == 0)
 {
+printf("here 1");
 _setenv(cmd, env);
 }
 else if (_strcmp(cmd[0], "unsetenv") == 0)
