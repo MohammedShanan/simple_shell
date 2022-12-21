@@ -43,7 +43,6 @@ void _setenv(char **cmd, list_t *env)
 char *str;
 list_t *var;
 int len_str;
-printf("here 2");
 if (cmd[1] == NULL || cmd[2] == NULL)
 {
 write(STDERR_FILENO, "Too few arguments\n", 18);
@@ -59,7 +58,6 @@ str = _strcpy(str, cmd[1]);
 str = _strcat(str, "=");
 str = _strcat(str, cmd[2]);
 var = get_env(cmd[1], env);
-printf("new env = %s", str);
 if (var == NULL)
 {
 add_node_end(&env, str);

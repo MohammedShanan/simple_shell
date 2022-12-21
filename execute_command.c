@@ -6,11 +6,9 @@
  * @cmd_num: the command number
  * Return: 0
  */
-int __execve(char **cmd, char *env[], int cmd_num)
+int __execve(char **cmd, char *env[], int cmd_num, list_t *env_list)
 {
 char *path;
-list_t *env_list;
-env_list = array_to_linked_list(env);
 if (builtins(cmd, env_list, cmd_num))
 {
 return (0);
@@ -25,7 +23,6 @@ if (fork() != 0)
 {
 wait(NULL);
 free(path);
-free_list(env_list);
 }
 else if (execve(path, cmd, env) == -1)
 {
@@ -76,12 +73,12 @@ return (exit_status);
  * non_interactive - handle non_interactive mode
  * @env: linked list of the environment variables
  */
-void non_interactive(char *env[])
+void non_interactive(char *env[], list_t *env_list)
 {
 char **cmds;
 int n = 0, exit_st;
 cmds = get_cmd();
-exit_st = execute_cmds(cmds, env, &n);
+exit_st = execute_cmds(cmds, env, &n, env_list);
 exit(exit_st);
 }
 /**
@@ -91,7 +88,7 @@ exit(exit_st);
 * @cmd_num: the command number
 * Return: 0
 */
-int execute_cmds(char **cmds, char *env[], int *cmd_num)
+int execute_cmds(char **cmds, char *env[], int *cmd_num, list_t *env_list)
 {
 char **cmd;
 int i = 0, exit_st = 0;
@@ -101,7 +98,7 @@ while (cmds[i] != NULL)
 cmd = _strtok(cmd, cmds[i], " ");
 if (cmd[0] != NULL)
 {
-exit_st = __execve(cmd, env, *cmd_num);
+    exit_st = __execve(cmd, env, *cmd_num, env_list);
 }
 free_double_ptr(cmd);
 i++;
