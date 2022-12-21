@@ -80,7 +80,7 @@ char **cmds;
 int n = 0, exit_st;
 cmds = get_cmd(env_list);
 exit_st = execute_cmds(cmds, env, &n, env_list);
-free_list(env);
+free_list(env_list);
 exit(exit_st);
 }
 /**

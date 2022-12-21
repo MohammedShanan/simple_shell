@@ -23,7 +23,6 @@ char *str;
 unsigned int len;
 struct list_s *next;
 } list_t;
-void prompt(char *env[]);
 void ctrl_d(int nread,char *cmd, list_t *env_list);
 void ctrl_c(int n __attribute__((unused)));
 /*helper functions 1*/
