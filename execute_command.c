@@ -93,6 +93,7 @@ char **cmd;
 int i = 0;
 while (cmds[i] != NULL)
 {
+*cmd_num = *cmd_num + 1;
 cmd = _strtok(cmd, cmds[i], " ");
 if (cmd[0] != NULL)
 {
@@ -100,7 +101,6 @@ __execve(cmd, env, *cmd_num);
 }
 free_double_ptr(cmd);
 i++;
-*cmd_num = *cmd_num + 1;
 }
 free_double_ptr(cmds);
 return (0);
