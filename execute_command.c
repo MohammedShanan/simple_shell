@@ -51,7 +51,6 @@ _env(env);
 }
 else if (_strcmp(cmd[0], "setenv") == 0)
 {
-printf("here 1");
 _setenv(cmd, env);
 }
 else if (_strcmp(cmd[0], "unsetenv") == 0)
@@ -97,6 +96,10 @@ while (cmds[i] != NULL)
 cmd = _strtok(cmd, cmds[i], " ");
 if (cmd[0] != NULL)
 {
+    if (_strcmp(cmd[0], "exit") == 0)
+    {
+        free_double_ptr(cmds);
+    }
     exit_st = __execve(cmd, env, *cmd_num, env_list);
 }
 free_double_ptr(cmd);
